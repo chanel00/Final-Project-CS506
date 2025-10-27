@@ -1,5 +1,5 @@
 # Final-Project-CS506
-CS506 Final Project Report
+CS506 Final Project Report - [https://youtu.be/2uMxnRy20Mo](url)
 1. Introduction
 The objective of this project was to develop a predictive model to estimate product ratings using various features such as price, review count, and other categorical variables. Multiple regression and classification techniques were explored to determine which approach could most accurately predict ratings.
 
