@@ -1,7 +1,7 @@
 Final-Project-CS506
 
 CS506 Final Project Report – [https://youtu.be/N8hSBmJJcU4?si=I6YtV1qTs7o9jRWm](https://youtu.be/N8hSBmJJcU4?si=fefODd4Jcil2HOkf)
-1. Introduction
+Introduction
 
 The objective of this project was to develop a predictive machine learning model capable of estimating retail product ratings using structured product and merchant attributes. The dataset included both numerical and categorical features such as price, number of reviews, shipping information, and merchant reputation metrics. There was also information on the details of the items and when they were released, what season, etc. Multiple modeling approaches were explored to evaluate the data and see if there could be any insights to report on.
 2. Methodology
