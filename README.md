@@ -1,9 +1,11 @@
 Final-Project-CS506
 
 CS506 Final Project Report – [https://youtu.be/N8hSBmJJcU4?si=I6YtV1qTs7o9jRWm](https://youtu.be/N8hSBmJJcU4?si=fefODd4Jcil2HOkf)
-Introduction
+
+1. Introduction
 
 The objective of this project was to develop a predictive machine learning model capable of estimating retail product ratings using structured product and merchant attributes. The dataset included both numerical and categorical features such as price, number of reviews, shipping information, and merchant reputation metrics. There was also information on the details of the items and when they were released, what season, etc. Multiple modeling approaches were explored to evaluate the data and see if there could be any insights to report on.
+
 2. Methodology
 
 2.1 Random Forest Regression
@@ -35,13 +37,15 @@ MAE: 0.400000000000003
 
 The result shows that the prediction is about 0.4 points off from the true rating. That isn't terrible on a 5 point scale but it isn't good either. I think this model has the potential to be improved upon however it is hard to make a popularity prediction with the vast amount of attributes and trying to figure out which one is the best. I think proving popularity is a bit harder than proving the rating score which is why it was the first thing I did.
 
-Confusion Matrix:
+3. Visualization and Exploratory Analysis
+
+3.1 Confusion Matrix
 
 Predicted Low	Predicted High
 Actual Low	32,604 (TN)	29,666 (FP)
 Actual High	19,803 (FN)	17,927 (TP)
 
-Interpretation:
+3.2 Interpretation:
 
 Correctly predicted ~52% of low ratings.
 
@@ -51,7 +55,7 @@ False positives were frequent, meaning low-rated items were often predicted as h
 
 These results confirm that separating rating classes based on the available features is very difficult.
 
-3. Visualization and Exploratory Analysis
+3.3 Statistic Analysis
 
 To explore the structure of the ratings, visual and statistical analysis was performed using:
 
@@ -82,4 +86,4 @@ With richer features, significantly stronger predictive performance would be exp
 
 This project demonstrated that traditional machine learning models — including logistic regression, linear regression, and random forest — struggle when the feature set does not strongly relate to the target variable.
 
-While the Random Forest Classifier showed slight improvement, overall prediction strength remained low. The results highlight that product rating prediction is inherently complex and requires more expressive and detailed data sources.
+While the Random Forest Regressor showed slight improvement, overall prediction strength remained low. The results highlight that product rating prediction is inherently complex and requires more expressive and detailed data sources. I think it is possible, given the work done here, that there could be more powerful data tools and applications that can be used to predict both ratings and popularity and I think developing this further could be something that I work on beyond this course.
