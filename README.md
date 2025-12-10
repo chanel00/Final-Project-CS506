@@ -1,115 +1,89 @@
-# Final-Project-CS506
-CS506 Final Project Report - [https://youtu.be/2uMxnRy20Mo](url)
+Final-Project-CS506
+
+CS506 Final Project Report – [https://youtu.be/N8hSBmJJcU4?si=I6YtV1qTs7o9jRWm](https://youtu.be/N8hSBmJJcU4?si=fefODd4Jcil2HOkf)
+
 1. Introduction
-The objective of this project was to develop a predictive model to estimate product ratings using various features such as price, review count, and other categorical variables. Multiple regression and classification techniques were explored to determine which approach could most accurately predict ratings.
+
+The objective of this project was to develop a predictive machine learning model capable of estimating retail product ratings using structured product and merchant attributes. The dataset included both numerical and categorical features such as price, number of reviews, shipping information, and merchant reputation metrics. There was also information on the details of the items and when they were released, what season, etc. Multiple modeling approaches were explored to evaluate the data and see if there could be any insights to report on.
 
 2. Methodology
-2.1 Logistic Regression
-Initially, a logistic regression model was applied to the dataset. However, the model performed poorly because it included string (categorical) variables that logistic regression cannot directly handle.
-To address this, feature encoding was later implemented, but the logistic regression still failed to provide meaningful predictive power.
+
+2.1 Random Forest Regression
+
+A Random Forest Regressor was tested to determine whether a non-linear model could better capture hidden patterns in the data. This model was able to handle complex interactions between variables, but the improvement was still limited.
+
+Feature importance analysis revealed that only a few variables — primarily price and review count — had measurable influence on the predicted rating. Even these variables showed weak predictive strength.
+
+This indicated that the model limitation was rooted in the data itself rather than the algorithm.
 Results:
-Validation R²: -5.1216 × 10⁻⁵
 
+Validation R²: 0.3246548656351851
+Test R²: 0.48800541666666863
+Validation MSE: 0.2119383108333315
+Validation MAE: 0.3220333333333325
 
-Test R²: -0.0003
+These results indicate that the model essentially learned to predict the average rating for most observations, providing little predictive value.
 
+2.2 Testing the Model
 
-Predicted Rating: [3.0052]
+Model didn't really work as well as it probably could. I think that this could be something that could be fixed with more time spent on it or more look into different models that could've possibly been used.
 
-
-Mean Squared Error (Validation): 1.3327
-
-
-Mean Absolute Error (Validation): 0.9995
-
-
-These results indicate that the model essentially predicted the average rating for all entries, suggesting little to no correlation between the input features and the target variable.
-
-2.2 Linear Regression
-Next, a linear regression model was implemented. To handle categorical data, one-hot encoding was used:
-X_encoded = pd.get_dummies(X, drop_first=True)
-
-This conversion allowed the model to process text data numerically.
 Results:
-Validation R²: -2.1556 × 10⁻⁵
 
+Predicted rating: [3.9]
+Predicted rating: [3.9]
+MSE: 0.16000000000000242
+MAE: 0.400000000000003
 
-Test R²: -0.0003
-
-
-Predicted Rating: [3.0107]
-
-
-Mean Squared Error (Validation): 1.3327
-
-
-Mean Absolute Error (Validation): 0.9995
-
-
-The results were very similar to those of logistic regression, again showing almost no predictive power.
-
-2.3 Random Forest Regression
-A Random Forest Regressor was then tested to determine whether a non-linear approach could improve results. Unfortunately, this model also produced similar outcomes, confirming that the available features lacked the necessary predictive strength.
-Feature importance analysis revealed that price and review count were the only attributes with any measurable influence on rating—but even these effects were minimal.
-
-2.4 Random Forest Classifier
-To simplify the task, the rating variable was converted into binary categories (high vs. low ratings), and a Random Forest Classifier was applied.
-Results Summary:
-The model was no longer predicting “all 0s”; it now made distinct predictions for high and low ratings.
-
-
-Despite this improvement, overall accuracy remained low (~0.51), indicating weak separation between classes.
-
-
-Confusion Matrix Analysis:
-
-
-Predicted Low
-Predicted High
-Actual Low
-32,604 (TN)
-29,666 (FP)
-Actual High
-19,803 (FN)
-17,927 (TP)
-
-Interpretation:
-The model correctly predicted ~52% of low ratings and ~48% of high ratings.
-
-
-False positives (predicting high rating when it was actually low) were frequent.
-
-
-The model demonstrates that product rating prediction is inherently noisy and that the selected features do not fully explain the outcome.
-
-
+The result shows that the prediction is about 0.4 points off from the true rating. That isn't terrible on a 5 point scale but it isn't good either. I think this model has the potential to be improved upon however it is hard to make a popularity prediction with the vast amount of attributes and trying to figure out which one is the best. I think proving popularity is a bit harder than proving the rating score which is why it was the first thing I did.
 
 3. Visualization and Exploratory Analysis
-To better understand the distribution of ratings, the following were used:
+
+3.1 Confusion Matrix
+
+Predicted Low	Predicted High
+Actual Low	32,604 (TN)	29,666 (FP)
+Actual High	19,803 (FN)	17,927 (TP)
+
+3.2 Interpretation:
+
+Correctly predicted ~52% of low ratings.
+
+Correctly predicted ~48% of high ratings.
+
+False positives were frequent, meaning low-rated items were often predicted as high.
+
+These results confirm that separating rating classes based on the available features is very difficult.
+
+3.3 Statistic Analysis
+
+To explore the structure of the ratings, visual and statistical analysis was performed using:
+
 df['Rating'].hist(bins=10)
 df['Rating'].describe()
 
-The histogram and descriptive statistics revealed that ratings were tightly clustered, with minimal variance. This explains why models tended to predict values close to the average rating (~3.0).
-A regression line around 0.4 in probability plots indicated underconfidence — the model’s predicted probabilities hovered around 40% for class 1, showing that it struggled to distinguish between high and low ratings.
+The histogram revealed that ratings were tightly clustered around the mean, with very little variance. This explains why many models defaulted to predicting values near the average rating (~3.0).
+
+Probability plots showed a regression trend hovering around 0.4, indicating model underconfidence — predicted probabilities rarely moved far from the midpoint, suggesting weak class separation capability.
 
 4. Discussion
-Across all modeling approaches, predictive performance was weak. The primary cause was not model choice but feature limitation. The available variables—mainly price, review count, and categorical text fields—did not capture the complexity influencing product ratings.
-Future work could focus on incorporating more descriptive and behavioral features such as:
-Sentiment analysis of review text
 
+Across all modeling approaches, predictive performance was consistently weak. The limitations were not due to algorithm choice, but rather to feature limitations. The available variables (primarily price, review counts, and basic product attributes) failed to capture the complex human and qualitative factors that influence reviews.
 
-Product category or brand reputation metrics
+Future improvements could include:
 
+Sentiment analysis on written reviews
 
-Temporal trends in ratings (e.g., seasonality)
+Product category or brand-level reputation features
 
+Temporal trends such as seasonality
 
-Customer demographic information
+Customer-level behavioral or demographic data
 
-
-These additions would likely provide more predictive power and allow for more meaningful model development.
+With richer features, significantly stronger predictive performance would be expected.
 
 5. Conclusion
-This project demonstrated that traditional regression and classification models (logistic regression, linear regression, and random forest) perform poorly when the predictor variables lack strong relationships to the target outcome.
-While the random forest classifier showed marginal improvement, the models overall confirmed that rating prediction is complex and requires richer, more informative data.
 
+This project demonstrated that traditional machine learning models — including logistic regression, linear regression, and random forest — struggle when the feature set does not strongly relate to the target variable.
+
+While the Random Forest Regressor showed slight improvement, overall prediction strength remained low. The results highlight that product rating prediction is inherently complex and requires more expressive and detailed data sources. I think it is possible, given the work done here, that there could be more powerful data tools and applications that can be used to predict both ratings and popularity and I think developing this further could be something that I work on beyond this course.
